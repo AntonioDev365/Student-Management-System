@@ -21,4 +21,25 @@ public class StudentServiceImpl implements StudentService{
     public List<Student> getAllStudents() {
         return studentRepository.findAll(); //Method by spring data jpa, return a full list of students
     }
+
+    @Override
+    public Student saveStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    @Override
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).get(); //Call also get method cause it returns an optional
+    }
+
+    @Override
+    public Student updateStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    @Override
+    public void deleteStudentById(Long id) {
+        studentRepository.deleteById(id);
+    }
+
 }

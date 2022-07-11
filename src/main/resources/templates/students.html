@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Student Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Student Management System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/students}">Student Management</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    <div class="container">
+    <div class="row">
+        <h1 class=" mt-4 mb-4">Student List</h1>
+    </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <a th:href="@{/students/addStudent}" class="btn btn-primary btn-sm mb-3">Add Student</a>
+            </div>
+        </div>
+        <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+            <tbody>
+                <tr th:each=" student: ${students}"> <!--Iterate over the students-->
+                    <td th:text="${student.firstName}"></td>
+                    <td th:text="${student.lastName}"></td>
+                    <td th:text="${student.email}"></td>
+                    <!--(id=${student.id}) will get the id from the student object, is the standard syntax to get id-->
+                    <td><a th:href="@{/students/edit/{id}(id=${student.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/students/{id}(id=${student.id})}" class="btn btn-danger">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
